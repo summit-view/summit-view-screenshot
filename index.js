@@ -65,17 +65,21 @@ var periodicCallback = function() {
 };
 
 var setupPeriodic = function() {
+    var seconds = config.interval || settings.interval;
+
     clearInterval(interval);
-    interval = setInterval(periodicCallback, parseInt(settings.interval) * 1000);
+    interval = setInterval(periodicCallback, parseInt(seconds) * 1000);
     periodicCallback();
 };
 
 var setPeriodicUrls = function() {
     urls = [];
 
-    if( settings.url ) {
+    var newUrl = config.url || settings.url;
+
+    if( newUrl ) {
         // track new keywords
-        var newUrls = settings.url.split(',');
+        var newUrls = newUrl.split(',');
 
         for (var i = 0; i < newUrls.length; i++) {
             urls.push(newUrls[i].trim());
@@ -97,7 +101,7 @@ var panel = function(s) {
 
             // default settings
             settings.url = settings.url || '';
-            settings.interval = settings.interval || 60;
+            settings.interval = settings.interval || 120;
             settings.delay = settings.delay || 10;
             settings.size = settings.size || '1440x900';
             settings.crop = (typeof settings.crop != 'undefined' ) ? settigns.crop : false;
