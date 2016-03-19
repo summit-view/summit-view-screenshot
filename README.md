@@ -95,9 +95,9 @@ Size of the viewport when taking a screenshot.
 
 #### mode
 Type: `string`  
+Available values: `webhook`  
 
 Set the mode of the panel. Leave empty or set to anything for default behaviour.  
-Available values: `webhook`  
 
 ##### Mode: `webhook`
 A `POST`-route will be set up at `/summit-view-screenshot/screenshot`, requests can be filtered with `filter` and `filterTarget`.
