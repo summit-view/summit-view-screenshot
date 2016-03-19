@@ -133,16 +133,17 @@ var panel = function(s) {
             if( !config.size ) {
                 summit.registerSetting({
                     name: 'size',
-                    label: 'Screenshot size in pixels',
+                    label: 'Screenshot size',
                     type: 'text',
                     value: settings.size,
+                    instructions: '1920x1080, 1280x720, 1440x900 etc.',
                 });
             }
 
             if( typeof config.crop == 'undefined' ) {
                 summit.registerSetting({
                     name: 'crop',
-                    label: 'Crop screenshot to the resoluion size (screenshots will have consistent height)',
+                    label: 'Crop screenshot to the resolution size (screenshots will have consistent height)',
                     type: 'boolean',
                     value: settings.crop,
                 });
