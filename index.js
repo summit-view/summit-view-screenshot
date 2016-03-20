@@ -13,7 +13,11 @@ var takeScreenshot = function(url) {
     screenshot(url, size, {crop: false, delay: parseInt(delay)})
         .then(function(buf) {
             fs.writeFileSync('.static/' + id + '/screenshot.png', buf);
-            summit.io.emit('screenshot', '');
+
+            if( config.mode == 'webhook' || ( config.mode != 'webhook' && urls.length ) ) {
+                summit.io.emit('screenshot', '');
+                summit.io.emit('loaded');
+            }
         });
 
 };
@@ -89,11 +93,18 @@ var setPeriodicUrls = function() {
             setupPeriodic();
         }
     }
+    else {
+        summit.io.emit('loading', 'No URL\'s to screenshot...');
+    }
 };
 
 var panel = function(s) {
     summit = s;
     config = config || {};
+
+    summit.io.on('connection', function(socket) {
+        socket.emit('loaded');
+    });
 
     return summit.settings()
         .then(function(s) {
@@ -177,6 +188,16 @@ var panel = function(s) {
 
             return {
                 id: id,
+                branding: {
+                    icon: {
+                        fa: 'camera',
+                    },
+                    color: {
+                        background: 'github-4',
+                        icon: 'clouds',
+                        text: 'clouds',
+                    },
+                },
             };
         });
 
