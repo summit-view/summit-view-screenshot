@@ -14,7 +14,7 @@
   "dependencies": {
     "mkdirp": "^0.5.1",
     "q": "^1.4.1",
-    "screenshot-promise": "^1.0.0"
+    "screenshot-promise": "^2.0.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
